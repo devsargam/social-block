@@ -4,6 +4,21 @@ import { createRoot } from "react-dom/client";
 const Popup = () => {
   const [count, setCount] = useState(0);
   const [currentURL, setCurrentURL] = useState<string>();
+  const [blockedUrls, setBlockedUrls] = useState<string[]>(
+    []
+  );
+
+  useEffect(() => {
+    chrome.storage.sync.get(
+      {
+        blockedWebsites: [],
+      },
+      (items) => {
+        setBlockedUrls(items.blockedWebsites);
+      }
+    );
+  }, []);
+
 
   useEffect(() => {
     chrome.action.setBadgeText({ text: count.toString() });
@@ -16,35 +31,25 @@ const Popup = () => {
   }, []);
 
   const changeBackground = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const tab = tabs[0];
-      if (tab.id) {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            color: "#555555",
-          },
-          (msg) => {
-            console.log("result message:", msg);
-          }
-        );
-      }
+    chrome.storage.sync.set({
+      blockedWebsites: [
+        'https://www.example.com',
+        'https://www.google.com',
+        currentURL,
+      ],
     });
   };
 
   return (
     <>
-      <ul style={{ minWidth: "700px" }}>
-        <li>Current URL: {currentURL}</li>
-        <li>Current Time: {new Date().toLocaleTimeString()}</li>
-      </ul>
-      <button
-        onClick={() => setCount(count + 1)}
-        style={{ marginRight: "5px" }}
-      >
-        count up
-      </button>
-      <button onClick={changeBackground}>change background</button>
+      <h1>Add a website to block</h1>
+      {JSON.stringify(blockedUrls)}
+      <input
+        type="text"
+        placeholder="https://www.example.com"
+        onChange={(event) => setCurrentURL(event.target.value)}
+      />
+      <button onClick={changeBackground}>Change background</button>
     </>
   );
 };
