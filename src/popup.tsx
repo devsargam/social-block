@@ -260,7 +260,13 @@ const Options = () => {
                     borderRadius: "5px",
                   }}
                 >
-                  <div style={{ wordBreak: "break-all", fontSize: "14px", color: "#e0e0e0" }}>
+                  <div
+                    style={{
+                      wordBreak: "break-all",
+                      fontSize: "14px",
+                      color: "#e0e0e0",
+                    }}
+                  >
                     {site.website}
                   </div>
                   <div
@@ -301,9 +307,9 @@ const Options = () => {
             ) : (
               <div
                 style={{
-                  textAlign: 'center',
-                  color:'#a3a3c2',
-                  padding:'15px',
+                  textAlign: "center",
+                  color: "#a3a3c2",
+                  padding: "15px",
                 }}
               >
                 No websites have been blocked
@@ -314,35 +320,35 @@ const Options = () => {
 
         <div
           style={{
-            display:"flex", 
-            justifyContent:"center", 
-            alignItems:"center", 
-            marginTop:"10px", 
-            gap:"10px"
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "10px",
+            gap: "10px",
           }}
         >
-          <span style={{ color:"#a3a3c2", fontSize:"14px"}}>
+          <span style={{ color: "#a3a3c2", fontSize: "14px" }}>
             Global Blocking:
           </span>
-          <Switch 
-            checked={isGlobalEnabled} 
-            onChange={toggleGlobalEnabled} 
-            id="globalSwitch" 
+          <Switch
+            checked={isGlobalEnabled}
+            onChange={toggleGlobalEnabled}
+            id="globalSwitch"
           />
         </div>
 
-        <button 
-          onClick={handleClearAll} 
+        <button
+          onClick={handleClearAll}
           style={{
-            backgroundColor:"#ff4d4f", 
-            color:"white", 
-            padding:"12px", 
-            borderRadius:"8px", 
-            cursor:"pointer", 
-            border:"none", 
-            fontWeight:"bold", 
-            marginTop:"20px", 
-            transition:"background-color 0.3s"
+            backgroundColor: "#ff4d4f",
+            color: "white",
+            padding: "12px",
+            borderRadius: "8px",
+            cursor: "pointer",
+            border: "none",
+            fontWeight: "bold",
+            marginTop: "20px",
+            transition: "background-color 0.3s",
           }}
         >
           Delete All Blocked Websites
